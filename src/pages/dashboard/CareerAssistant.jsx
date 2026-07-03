@@ -4,12 +4,22 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CareerAssistant() {
-  const [messages, setMessages] = useState([
-    {
-      role: 'model',
-      text: "Hello! I am your AI Career and Academic Counselor. How can I help you plan your courses, explore career paths, or achieve your academic goals today?"
+  const [messages, setMessages] = useState(() => {
+    const saved = localStorage.getItem('careerAssistantChat');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // Fallback to default if parsing fails
+      }
     }
-  ]);
+    return [
+      {
+        role: 'model',
+        text: "Hello! I am your AI Career and Academic Counselor. How can I help you plan your courses, explore career paths, or achieve your academic goals today?"
+      }
+    ];
+  });
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,6 +32,7 @@ export default function CareerAssistant() {
   };
 
   useEffect(() => {
+    localStorage.setItem('careerAssistantChat', JSON.stringify(messages));
     scrollToBottom();
   }, [messages]);
 
