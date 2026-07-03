@@ -43,12 +43,12 @@ export default function LandingPage() {
       <div className="absolute bottom-1/3 right-1/4 w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.8)] z-0"></div>
 
       {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between px-8 py-6 w-full max-w-7xl mx-auto">
+      <nav className="relative z-10 flex items-center justify-between px-4 sm:px-8 py-6 w-full max-w-7xl mx-auto">
         <div className="flex items-center gap-2 flex-shrink-0">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
             <Share2 className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold tracking-tight">CourseFlow</span>
+          <span className="text-xl font-bold tracking-tight hidden sm:block">CourseFlow</span>
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
@@ -58,25 +58,25 @@ export default function LandingPage() {
           <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
         </div>
 
-        <div className="flex items-center gap-6 text-sm font-medium">
-          <Link to={authRoute} className="text-white/70 hover:text-white transition-colors active:scale-95">{isLoggedIn ? 'Dashboard' : 'Sign In'}</Link>
-          <Link to={authRoute} className="px-5 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 hover:opacity-90 transition-all active:scale-95 flex items-center gap-2 font-semibold">
-            <Sparkles className="w-4 h-4" /> {isLoggedIn ? 'Go to Dashboard' : 'Get Started'}
+        <div className="flex items-center gap-2 sm:gap-6 text-sm font-medium">
+          <Link to={authRoute} className="hidden sm:block text-white/70 hover:text-white transition-colors active:scale-95">{isLoggedIn ? 'Dashboard' : 'Sign In'}</Link>
+          <Link to={authRoute} className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 hover:opacity-90 transition-all active:scale-95 flex items-center gap-2 font-semibold whitespace-nowrap text-xs sm:text-sm">
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" /> {isLoggedIn ? 'Go to Dashboard' : 'Get Started'}
           </Link>
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-8 pt-20 pb-32 flex flex-col lg:flex-row items-center gap-16">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-10 sm:pt-20 pb-20 sm:pb-32 flex flex-col lg:flex-row items-center gap-10 sm:gap-16">
         
         {/* Left Column */}
-        <div className="flex-1 max-w-2xl">
+        <div className="flex-1 w-full max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-xs font-semibold tracking-wider text-white/70 mb-8 uppercase">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             AI-Powered Academic Planning
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[1.1] mb-6">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-[1.1] mb-6 break-words">
             <div className="text-white">Plan Smarter.</div>
             <div className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">Graduate Faster.</div>
           </h1>
@@ -85,11 +85,11 @@ export default function LandingPage() {
             Transform course registration into an intelligent experience using graph algorithms, prerequisite visualization, and personalized learning paths.
           </p>
           
-          <div className="flex flex-wrap items-center gap-4 mb-12">
-            <Link to={authRoute} className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all active:scale-95">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-12 w-full">
+            <Link to={authRoute} className="w-full sm:w-auto justify-center px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all active:scale-95">
               {isLoggedIn ? 'Enter Dashboard' : 'Get Started'} <ArrowRight className="w-4 h-4" />
             </Link>
-            <button className="px-8 py-4 rounded-full bg-white/[0.03] border border-white/10 text-white font-semibold flex items-center gap-2 hover:bg-white/[0.08] transition-all active:scale-95">
+            <button className="w-full sm:w-auto justify-center px-8 py-4 rounded-full bg-white/[0.03] border border-white/10 text-white font-semibold flex items-center gap-2 hover:bg-white/[0.08] transition-all active:scale-95">
               <Play className="w-4 h-4" fill="currentColor" /> Watch Demo
             </button>
           </div>
@@ -105,8 +105,8 @@ export default function LandingPage() {
         </div>
 
         {/* Right Column - Dashboard UI Mockup */}
-        <div className="flex-1 w-full relative h-[600px] flex items-center justify-center">
-          <div className="relative w-full max-w-lg ml-10">
+        <div className="flex-1 w-full relative h-[350px] sm:h-[450px] lg:h-[600px] flex items-center justify-center mt-10 lg:mt-0 scale-[0.7] sm:scale-75 lg:scale-100 origin-top lg:origin-center hidden sm:flex">
+          <div className="relative w-full max-w-lg lg:ml-10">
             
             {/* Card 1: Degree Completion */}
             <div className="absolute top-0 right-0 w-[360px] bg-[#0A0A0F] border border-white/10 rounded-2xl p-6 shadow-2xl z-10 transform translate-x-12 -translate-y-16">
