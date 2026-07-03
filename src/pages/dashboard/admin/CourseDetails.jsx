@@ -14,7 +14,7 @@ export default function CourseDetails() {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/courses/${id}`, { withCredentials: true });
+      const response = await axios.get(`https://course-registration-production-967c.up.railway.app/api/courses/${id}`, { withCredentials: true });
       setCourse(response.data);
     } catch (error) {
       console.error('Error fetching course details', error);

@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }) {
 
     // Connect using native WebSockets (bypassing SockJS to remove the unload violation)
     const stompClient = new Client({
-      brokerURL: 'ws://localhost:8080/ws/websocket',
+      brokerURL: 'wss://course-registration-production-967c.up.railway.app/ws/websocket',
       debug: function (str) {}, // Keep console clean
       reconnectDelay: 5000,
       onConnect: () => {

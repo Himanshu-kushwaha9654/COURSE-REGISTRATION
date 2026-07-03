@@ -2,7 +2,7 @@ import axios from 'react'; // oops wait I don't need to import react, just axios
 import axiosInstance from 'axios';
 
 const api = axiosInstance.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'https://course-registration-production-967c.up.railway.app/api',
 });
 
 api.interceptors.request.use(
