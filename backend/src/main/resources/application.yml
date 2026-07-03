@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://hayabusa.proxy.rlwy.net:18368/railway?options=-c%20timezone=UTC&reWriteBatchedInserts=true
+    username: postgres
+    password: loKoyGrCiQzthNSmywevSniCMCvbTPWc
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      max-lifetime: 300000
+      keepalive-time: 60000
+      connection-timeout: 20000
+      minimum-idle: 2
+      maximum-pool-size: 10
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+        order_updates: true
+
+app:
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration: 86400000 # 1 day
