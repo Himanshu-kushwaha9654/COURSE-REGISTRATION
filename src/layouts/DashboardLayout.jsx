@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Menu, LayoutDashboard, Library, BookOpen, Map, Sparkles, Calendar, PieChart, User, Database, Network, Cpu, Activity, Sun, Moon, Bot, Users, Send, LogOut } from 'lucide-react';
+import { Search, Bell, Menu, X, LayoutDashboard, Library, BookOpen, Map, Sparkles, Calendar, PieChart, User, Database, Network, Cpu, Activity, Sun, Moon, Bot, Users, Send, LogOut } from 'lucide-react';
 import { NavLink, Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../api/axiosConfig';
@@ -17,6 +17,7 @@ export default function DashboardLayout({ children }) {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
   // Dark/Light Mode state
@@ -216,13 +217,88 @@ export default function DashboardLayout({ children }) {
         </aside>
       </div>
 
+      {/* Mobile Sidebar Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            />
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              className="fixed inset-y-0 left-0 w-[280px] bg-[var(--bg-color)] border-r border-[var(--glass-border)] z-50 md:hidden flex flex-col shadow-2xl"
+            >
+              <div className="h-20 flex items-center justify-between px-6 border-b border-[var(--glass-border)] shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center shadow-[0_0_15px_rgba(45,212,191,0.4)]">
+                    <Activity className="w-4 h-4 text-white" strokeWidth={2.5} />
+                  </div>
+                  <span className="text-lg font-black tracking-tight text-teal-400">CourseFlow</span>
+                </div>
+                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 opacity-50 hover:opacity-100 hover:bg-white/10 rounded-full transition-colors">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <nav className="flex-1 py-4 px-4 space-y-1 overflow-y-auto custom-scrollbar">
+                {navItems.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <NavLink
+                      key={index}
+                      to={item.path}
+                      end={item.exact}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={({ isActive }) => `w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl active:scale-95 transition-all duration-300 ${
+                        isActive
+                          ? 'bg-gradient-to-r from-teal-500/15 to-emerald-500/5 text-teal-500 border border-teal-500/20 shadow-[0_0_15px_rgba(45,212,191,0.05)] font-bold'
+                          : 'text-slate-400 hover:bg-slate-500/10 hover:text-slate-500'
+                      }`}
+                    >
+                      {({ isActive }) => (
+                        <>
+                          <Icon className={`w-5 h-5 transition-colors ${isActive ? 'text-teal-500' : 'text-slate-500'}`} strokeWidth={isActive ? 2.5 : 2} />
+                          <span className={`text-[15px] ${isActive ? 'text-[var(--text-color)]' : ''}`}>{item.label}</span>
+                        </>
+                      )}
+                    </NavLink>
+                  );
+                })}
+              </nav>
+              
+              <div className="p-6 border-t border-[var(--glass-border)] shrink-0">
+                <button 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    handleSignOut();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500/20 transition-all font-bold text-sm"
+                >
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col relative overflow-hidden pt-4 pr-4 pb-4 pl-4 md:pl-6">
         
         {/* Floating Top Navbar */}
         <header className="h-20 glass-panel rounded-3xl flex items-center justify-between px-6 z-10 mb-6 shrink-0">
           <div className="flex items-center gap-4 flex-1">
-            <button className="md:hidden opacity-50 hover:opacity-100">
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden opacity-50 hover:opacity-100 p-2 -ml-2 rounded-full hover:bg-[var(--glass-border)] transition-colors"
+            >
               <Menu className="w-6 h-6" />
             </button>
             <div className="relative w-full max-w-lg hidden md:block group">
