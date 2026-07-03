@@ -28,9 +28,10 @@ export default function LandingPage() {
         loop
         muted
         playsInline
+        crossOrigin="anonymous"
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-20 pointer-events-none"
       >
-        <source src="/hero-background.mp4?v=1" type="video/mp4" />
+        <source src="/hero-background.mp4" type="video/mp4" />
       </video>
 
       {/* Background decorations */}
