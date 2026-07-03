@@ -27,7 +27,7 @@ const item = {
 export default function DashboardHome() {
   return (
     <motion.div 
-      className="p-8 pb-32"
+      className="pb-32"
       variants={container}
       initial="hidden"
       animate="show"

@@ -410,7 +410,7 @@ export default function DashboardLayout({ children }) {
         </header>
 
         {/* Scrollable Dashboard Body */}
-        <main className="flex-1 overflow-y-auto relative z-0 glass-panel rounded-3xl p-8 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto relative z-0 glass-panel rounded-3xl p-4 sm:p-8 custom-scrollbar">
           <div className="relative z-10 max-w-7xl mx-auto h-full">
             <AnimatePresence mode="wait">
               <motion.div
