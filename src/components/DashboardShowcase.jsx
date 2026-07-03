@@ -1,4 +1,14 @@
 import { motion } from 'framer-motion';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+const chartData = [
+  { name: 'Sem 1', gpa: 3.2, credits: 15 },
+  { name: 'Sem 2', gpa: 3.5, credits: 16 },
+  { name: 'Sem 3', gpa: 3.4, credits: 14 },
+  { name: 'Sem 4', gpa: 3.8, credits: 18 },
+  { name: 'Sem 5', gpa: 3.7, credits: 15 },
+  { name: 'Sem 6', gpa: 3.9, credits: 18 },
+];
 
 export default function DashboardShowcase() {
   return (
@@ -53,9 +63,26 @@ export default function DashboardShowcase() {
               </div>
 
               <div className="flex-1 rounded-2xl bg-white/5 border border-white/10 p-6 flex flex-col">
-                <div className="text-sm text-white/50 mb-4">Recommended Courses Pipeline</div>
-                <div className="flex-1 bg-white/[0.02] rounded-xl border border-white/5 flex items-center justify-center">
-                  <div className="text-white/20">Analytics Chart Placeholder</div>
+                <div className="text-sm text-white/50 mb-2">GPA Progression Trend</div>
+                <div className="flex-1 w-full h-full min-h-[150px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                      <defs>
+                        <linearGradient id="colorGpa" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor="#22d3ee" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+                      <XAxis dataKey="name" stroke="rgba(255,255,255,0.3)" fontSize={12} tickLine={false} axisLine={false} />
+                      <YAxis stroke="rgba(255,255,255,0.3)" fontSize={12} tickLine={false} axisLine={false} domain={[2.0, 4.0]} />
+                      <Tooltip 
+                        contentStyle={{ backgroundColor: '#0A0A0F', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px' }}
+                        itemStyle={{ color: '#22d3ee', fontWeight: 'bold' }}
+                      />
+                      <Area type="monotone" dataKey="gpa" stroke="#22d3ee" strokeWidth={3} fillOpacity={1} fill="url(#colorGpa)" />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
             </div>
