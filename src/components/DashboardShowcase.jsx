@@ -33,9 +33,9 @@ export default function DashboardShowcase() {
             <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
           </div>
           
-          <div className="p-8 grid grid-cols-12 gap-6 h-[600px] overflow-hidden">
+          <div className="p-4 sm:p-8 flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-6 h-[500px] md:h-[600px] overflow-hidden">
             {/* Sidebar */}
-            <div className="col-span-3 space-y-4 border-r border-white/10 pr-6">
+            <div className="hidden md:block col-span-3 space-y-4 border-r border-white/10 pr-6">
               <div className="h-10 w-full bg-white/10 rounded-lg animate-pulse"></div>
               <div className="h-8 w-3/4 bg-white/5 rounded animate-pulse"></div>
               <div className="h-8 w-1/2 bg-white/5 rounded animate-pulse"></div>
@@ -43,8 +43,8 @@ export default function DashboardShowcase() {
             </div>
             
             {/* Main Content */}
-            <div className="col-span-9 flex flex-col gap-6">
-              <div className="flex gap-6">
+            <div className="col-span-12 md:col-span-9 flex flex-col gap-4 md:gap-6 h-full">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                 <div className="flex-1 p-6 rounded-2xl bg-white/5 border border-white/10">
                   <div className="text-sm text-white/50 mb-2">Degree Completion</div>
                   <div className="text-3xl font-bold mb-4">78%</div>
